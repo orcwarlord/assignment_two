@@ -20,7 +20,8 @@ class BookFactory extends Factory
             'title' => $this->faker->words(rand(1, 10), true),
             'synopsis' => $this->faker->realText(500),
             'isbn' => $this->faker->isbn13(),
-            'published_date' => now()
+            'published_date' => now(),
+
 
         ];
     }

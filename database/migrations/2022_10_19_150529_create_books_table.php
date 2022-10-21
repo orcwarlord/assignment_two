@@ -20,7 +20,7 @@ return new class extends Migration
             $table->text('synopsis');
             $table->unsignedSmallInteger('no_pages')->nullable();
             $table->string('isbn',16)->nullable();
-            $table->binary('cover_image')->nullable;
+            $table->string('cover_image')->nullable();
             $table->timestamps();
         });
     }

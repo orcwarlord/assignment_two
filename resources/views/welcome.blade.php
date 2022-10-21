@@ -27,9 +27,22 @@
                     @endauth
                 </div>
             @endif
-            <h1 class="text-5xl">
-                Bonus Libris
-            </h1>
+
+        </div>
+        <h1 class="text-3xl">{{ $title }}</h1>
+        <div class="grid grid-cols-3">
+
+
+
+            @foreach ($books as $book)
+                <section>
+                    <h2 class="text-2xl uppercase">{{ $book->title }}</h2>
+
+                    <p>{{ $book->synopsis }}</p>
+                </section>
+            @endforeach
+
+
         </div>
     </body>
 </html>
