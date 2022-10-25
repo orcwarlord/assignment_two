@@ -18,14 +18,19 @@ class BookController extends Controller
         $userId = Auth::user()->id;
         $userLevel = Auth::user()->userlevel;
         if ($userLevel === 'user') {
-            return view('books/indexUser');
+            return view('books.indexUser');
         }
         else {
             $books = Book::orderBy('created_at', 'desc')->paginate(20);
+            //Most recently created
             // dd($books);
-            return view('books/indexAdmin', [
-                'books' => $books
-            ]);
+
+            // Using the helper method (same as following example.
+            return view('books.indexAdmin')->with('books', $books);
+
+            // return view('books.indexAdmin', [
+            //     'books' => $books
+            // ]);
         }
     }
 

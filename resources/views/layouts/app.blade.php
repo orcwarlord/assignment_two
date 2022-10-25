@@ -28,8 +28,8 @@
             {{-- @endif --}}
 
             <!-- Page Content -->
-                <section class="content">
-                    <div class="container mx-auto">
+                <section class="content py-12">
+                    <div class="container mx-auto max-w-7xl sm:px-6 lg:px-8">
                         @yield('content')
                     </div>
                 </section>
