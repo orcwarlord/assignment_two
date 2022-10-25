@@ -17,5 +17,7 @@ class WelcomeController extends Controller
             'title' => 'Our Books',
 	        'books' => $books
         ]);
+
+        // return view('welcome');
     }
 }

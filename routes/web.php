@@ -23,6 +23,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::resource('/books', BookController::class);
+Route::resource('/books', BookController::class)->middleware(['auth']);
+
+
 
 require __DIR__.'/auth.php';

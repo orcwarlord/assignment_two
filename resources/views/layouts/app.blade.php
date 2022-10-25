@@ -18,18 +18,27 @@
             @include('layouts.navigation')
 
             <!-- Page Heading -->
-            @if (isset($header))
+            {{-- @if (isset($header)) --}}
                 <header class="bg-white shadow">
                     <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-                        {{ $header }}
+                        @yield('title')
+                        {{-- {{ $title }} --}}
                     </div>
                 </header>
-            @endif
+            {{-- @endif --}}
 
             <!-- Page Content -->
-            <main>
-                {{ $slot }}
-            </main>
+                <section class="content">
+                    <div class="container mx-auto">
+                        @yield('content')
+                    </div>
+                </section>
+
+
+
+            {{-- <main>
+                {{ $content }}
+            </main> --}}
         </div>
     </body>
 </html>

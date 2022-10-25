@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -14,7 +15,18 @@ class BookController extends Controller
      */
     public function index()
     {
-        //
+        $userId = Auth::user()->id;
+        $userLevel = Auth::user()->userlevel;
+        if ($userLevel === 'user') {
+            return view('books/indexUser');
+        }
+        else {
+            $books = Book::orderBy('created_at', 'desc')->paginate(20);
+            // dd($books);
+            return view('books/indexAdmin', [
+                'books' => $books
+            ]);
+        }
     }
 
     /**
@@ -24,7 +36,7 @@ class BookController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -46,7 +58,9 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        //
+        return view('books.show', [
+            'book' => $book
+        ]);
     }
 
     /**
