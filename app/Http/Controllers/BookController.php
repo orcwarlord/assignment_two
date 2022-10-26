@@ -59,9 +59,18 @@ class BookController extends Controller
             'synopsis' => 'required',
             'no_pages' => 'min:1|integer|nullable',
             'isbn' => 'size:13|nullable',
-            'published_date' => 'nullable'
-
+            'published_date' => 'required'
         ]);
+
+        Book::create([
+            'title' => $request->title,
+            'synopsis' => $request->synopsis,
+            'no_pages' => $request->no_pages,
+            'isbn' => $request->isbn,
+            'published_date' => $request->published_date
+        ]);
+
+        return to_route('books.index');
     }
 
     /**

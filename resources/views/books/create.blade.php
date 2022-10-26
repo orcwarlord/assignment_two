@@ -57,7 +57,12 @@
 
 
             <x-input-label for="published_date" class="mt-6">Date of Publication</x-input-label>
-            <x-input type="date" name="published_date" field="published_date" aria-placeholder="Date of Publication"></x-input>
+            <x-input
+                type="date"
+                name="published_date"
+                field="published_date"
+                aria-placeholder="Date of Publication"
+                :value="@old('published_date')"></x-input>
             <br/>
             <x-button class="mt-6 block">Save Book</x-button>
         </form>
