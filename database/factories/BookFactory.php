@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use Ramsey\Uuid\Uuid;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,6 +18,7 @@ class BookFactory extends Factory
     public function definition()
     {
         return [
+            'uuid' => Uuid::uuid4()->toString(),
             'title' => $this->faker->words(rand(1, 10), true),
             'synopsis' => $this->faker->realText(500),
             'isbn' => $this->faker->isbn13(),

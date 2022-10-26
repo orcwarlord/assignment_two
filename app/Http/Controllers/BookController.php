@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Book;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -63,6 +64,7 @@ class BookController extends Controller
         ]);
 
         Book::create([
+            'uuid' => Str::uuid(),
             'title' => $request->title,
             'synopsis' => $request->synopsis,
             'no_pages' => $request->no_pages,
@@ -85,6 +87,20 @@ class BookController extends Controller
             'book' => $book
         ]);
     }
+
+    // /**
+    //  * Display the specified resource.
+    //  *
+    //  * @param  \App\Models\Book  $book
+    //  * @return \Illuminate\Http\Response
+    //  */
+    // public function show($uuid)
+    // {
+    //     $book = Book::where('uuid', $uuid);
+    //     return view('books.show')->with('book', $book);
+    // }
+
+
 
     /**
      * Show the form for editing the specified resource.
