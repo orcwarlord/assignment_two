@@ -28,7 +28,7 @@ class BookController extends Controller
             // Using the helper method (same as following example.
             return view('books.indexAdmin')->with('books', $books);
 
-            // return view('books.indexAdmin', [
+            // return view('books.index', [
             //     'books' => $books
             // ]);
         }
@@ -52,7 +52,16 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        // dd($request);
+        //Validate fields
+        $request->validate([
+            'title' => 'required|max:200',
+            'synopsis' => 'required',
+            'no_pages' => 'min:1|integer|nullable',
+            'isbn' => 'size:13|nullable',
+            'published_date' => 'nullable'
+
+        ]);
     }
 
     /**
