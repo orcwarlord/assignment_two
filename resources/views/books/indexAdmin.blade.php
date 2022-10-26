@@ -10,6 +10,8 @@
         </div>
     @endif
 
+    <a href="{{ route('books.create') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
+
     @foreach ($books as $book)
         <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-sm sm:rounded-lg">
             <h3 class="font-bold text-2xl"><a href="{{ route('books.show', $book->id)}}">{{$book->title}}</a></h3>
