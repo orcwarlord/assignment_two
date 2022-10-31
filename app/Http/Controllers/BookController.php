@@ -110,7 +110,7 @@ class BookController extends Controller
      */
     public function edit(Book $book)
     {
-        //
+        return view('books.edit')->with('book', $book);
     }
 
     /**
@@ -122,7 +122,25 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
-        //
+        //Validate fields
+        $request->validate([
+            'title' => 'required|max:200',
+            'synopsis' => 'required',
+            'no_pages' => 'min:1|integer|nullable',
+            'isbn' => 'size:13|nullable',
+            'published_date' => 'required'
+        ]);
+
+        $book->update([
+            'title' => $request->title,
+            'synopsis' => $request->synopsis,
+            'no_pages' => $request->no_pages,
+            'isbn' => $request->isbn,
+            'published_date' => $request->published_date
+
+        ]);
+
+        return to_route('books.show', $book);
     }
 
     /**
