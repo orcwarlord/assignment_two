@@ -3,6 +3,10 @@
 @section('title',  $book->title)
 
 @section('content')
+    <x-alert-success>
+       {{ session('success')}}
+    </x-alert-success>
+
     <div class="flex">
         <p class="opacity-70 text-sm">
             <strong>Created: </strong>{{ $book->created_at->diffForHumans() }}
@@ -14,7 +18,7 @@
         <form action="{{ route('books.destroy', $book) }}" method="post">
             @method('delete')
             @csrf
-            <button type="submit" class="btn btn-danger ml-4"></button>
+            <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you want to delete this book?')">Delete Book</button>
         </form>
     </div>
     <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-sm sm:rounded-lg">

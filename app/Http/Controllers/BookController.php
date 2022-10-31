@@ -140,7 +140,7 @@ class BookController extends Controller
 
         ]);
 
-        return to_route('books.show', $book);
+        return to_route('books.show', $book)->with('success', 'Book updated successfully.');
     }
 
     /**
@@ -151,6 +151,8 @@ class BookController extends Controller
      */
     public function destroy(Book $book)
     {
-        //
+        $book->delete();
+
+        return to_route('books.index')->with('success', 'Note deleted successfully');
     }
 }

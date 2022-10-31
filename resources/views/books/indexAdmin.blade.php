@@ -4,11 +4,15 @@
 
 @section('content')
 
-    @if ($message = Session::get('success'))
+    {{-- @if ($message = Session::get('success'))
         <div class="alert alert-success">
             <p>{{ $message }}</p>
         </div>
-    @endif
+    @endif --}}
+
+    <x-alert-success>
+        {{ session('success') }}
+    </x-alert-success>
 
     <a href="{{ route('books.create') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
 
