@@ -155,4 +155,6 @@ class BookController extends Controller
 
         return to_route('books.index')->with('success', 'Note deleted successfully');
     }
+
+
 }
