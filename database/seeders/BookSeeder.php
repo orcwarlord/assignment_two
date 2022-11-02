@@ -35,7 +35,8 @@ class BookSeeder extends Seeder
                     'no_pages' => $faker->numberBetween($min = 150, $max = 1000),
                     'isbn' => $book->primary_isbn13,
                     'cover_image' => $book->book_image,
-                    'author' => $book->author
+                    'author' => $book->author,
+                    'user_id' => 1
                 ]);
             }
         }
