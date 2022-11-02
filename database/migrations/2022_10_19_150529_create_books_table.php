@@ -22,6 +22,7 @@ return new class extends Migration
             $table->unsignedSmallInteger('no_pages')->nullable();
             $table->string('isbn',16)->nullable();
             $table->string('cover_image')->nullable();
+            $table->string('author');
             $table->timestamps();
         });
     }
