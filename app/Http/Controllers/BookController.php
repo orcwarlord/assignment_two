@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+
 class BookController extends Controller
 {
     /**
@@ -22,16 +23,14 @@ class BookController extends Controller
             return view('books.indexUser');
         }
         else {
-            $books = Book::orderBy('created_at', 'desc')->paginate(20);
+
             //Most recently created
-            // dd($books);
+            $books = Book::orderBy('created_at', 'desc')->paginate(20);
 
             // Using the helper method (same as following example.
             return view('books.indexAdmin')->with('books', $books);
 
-            // return view('books.index', [
-            //     'books' => $books
-            // ]);
+
         }
     }
 
@@ -53,14 +52,15 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request);
+        $urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         //Validate fields
         $request->validate([
             'title' => 'required|max:200',
             'synopsis' => 'required',
             'no_pages' => 'min:1|integer|nullable',
             'isbn' => 'size:13|nullable',
-            'published_date' => 'required'
+            'published_date' => 'required',
+            'cover_image' => 'required|regex:' . $urlRegex,
         ]);
 
         Book::create([
@@ -69,7 +69,10 @@ class BookController extends Controller
             'synopsis' => $request->synopsis,
             'no_pages' => $request->no_pages,
             'isbn' => $request->isbn,
-            'published_date' => $request->published_date
+            'published_date' => $request->published_date,
+            'author' => $request->author,
+            'user_id' => 1,
+            'cover_image' => $request->cover_image
         ]);
 
         return to_route('books.index');

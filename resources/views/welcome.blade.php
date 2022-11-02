@@ -13,7 +13,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
+    <body class="font-sans antialiased bg-emerald-100">
         <div class="min-h-screen bg-emerald-100 max-w-screen-xl mx-auto">
 
 
@@ -43,11 +43,11 @@
                                 @endauth
                             </div>
                         @endif
-                            {{-- <h1 class="text-3xl">Books!</h1> --}}
+
                     </div>
                 </nav>
 
-                <h1 class="text-3xl mt-5 pb-5">{{ $title }}</h1>
+                <h1 class="text-3xl mt-5 pb-5 px-4">{{ $title }}</h1>
 
 
                 </header>

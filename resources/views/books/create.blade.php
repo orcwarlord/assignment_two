@@ -34,16 +34,15 @@
                 class="w-full mt-6"
                 :value="@old('synopsis')"></x-textarea>
 
-
-            <x-input-label for="isbn" class="mt-6">ISBN 13</x-input-label>
+            <x-input-label for="author" class="mt-6">Author</x-input-label>
             <x-input
                 type="text"
-                name="isbn"
-                field="isbn"
-                id=""
-                placeholder="XXXXXXXXXXXXX"
-                aria-placeholder="13 digit ISBN number"
-                :value="@old('isbn')" ></x-input>
+                name="author"
+                field="author"
+                min="1"
+                :value="@old('author')"
+                aria-placeholder="author"></x-input>
+
 
 
             <x-input-label for="no_pages" class="mt-6">Number of Pages</x-input-label>
@@ -63,6 +62,26 @@
                 field="published_date"
                 aria-placeholder="Date of Publication"
                 :value="@old('published_date')"></x-input>
+
+            <x-input-label for="isbn" class="mt-6">ISBN 13</x-input-label>
+            <x-input
+                type="text"
+                name="isbn"
+                field="isbn"
+                id=""
+                placeholder="XXXXXXXXXXXXX"
+                aria-placeholder="13 digit ISBN number"
+                :value="@old('isbn')" ></x-input>
+
+            <x-input-label for="cover_image" class="mt-6">Cover Image Link</x-input-label>
+            <x-input
+                type="text"
+                name="cover_image"
+                field="cover_image"
+                id=""
+                placeholder="Enter full url for the image"
+                :value="@old('cover_image')" ></x-input>
+
             <br/>
             <x-button class="mt-6 block">Save Book</x-button>
         </form>
