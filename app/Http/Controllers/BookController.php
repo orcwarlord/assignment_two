@@ -18,7 +18,7 @@ class BookController extends Controller
      */
     public function index()
     {
-        $userId = Auth::user()->id;
+
         $userLevel = Auth::user()->userlevel;
         if ($userLevel === 'user') {
             return view('books.indexUser');
@@ -53,6 +53,7 @@ class BookController extends Controller
      */
     public function store(Request $request)
     {
+        $userId = Auth::user()->id;
         $urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         //Validate fields
         $request->validate([
@@ -72,7 +73,7 @@ class BookController extends Controller
             'isbn' => $request->isbn,
             'published_date' => $request->published_date,
             'author' => $request->author,
-            'user_id' => 1,
+            'user_id' => $userId,
             'cover_image' => $request->cover_image
         ]);
 
@@ -87,6 +88,7 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
+        // $username = Book::with(user);
         return view('books.show', [
             'book' => $book
         ]);
@@ -128,6 +130,7 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $userId = Auth::user()->id;
         $urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         //Validate fields
         $request->validate([
@@ -146,7 +149,7 @@ class BookController extends Controller
             'isbn' => $request->isbn,
             'published_date' => $request->published_date,
             'author' => $request->author,
-            'user_id' => 1,
+            'user_id' => $userId,
             'cover_image' => $request->cover_image
 
         ]);

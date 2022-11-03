@@ -21,11 +21,20 @@ class UserSeeder extends Seeder
         User::factory()
             ->count(1)
             ->create([
-                'name' => 'Martin Hramiak',
-                'email' => 'martin@martin.com',
+                'name' => 'Test Admin 1',
+                'email' => 'testadmin1@testadmin.com',
                 'password' => Hash::make('password'),
                 'userlevel' => 'admin',
             ]);
+
+        User::factory()
+        ->count(1)
+        ->create([
+            'name' => 'Test Admin 2',
+            'email' => 'testadmin2@testadmin.com',
+            'password' => Hash::make('password'),
+            'userlevel' => 'admin',
+        ]);
 
         User::factory()
             ->count(4)
