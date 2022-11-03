@@ -6,6 +6,7 @@ use App\Models\Book;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 
 class BookController extends Controller
@@ -60,7 +61,7 @@ class BookController extends Controller
             'no_pages' => 'min:1|integer|nullable',
             'isbn' => 'size:13|nullable',
             'published_date' => 'required',
-            'cover_image' => 'required|regex:' . $urlRegex,
+            // 'cover_image' => 'url'. $urlRegex
         ]);
 
         Book::create([
@@ -89,6 +90,8 @@ class BookController extends Controller
         return view('books.show', [
             'book' => $book
         ]);
+
+        // dd($book);
     }
 
     // /**
@@ -125,13 +128,15 @@ class BookController extends Controller
      */
     public function update(Request $request, Book $book)
     {
+        $urlRegex = '/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/';
         //Validate fields
         $request->validate([
             'title' => 'required|max:200',
             'synopsis' => 'required',
             'no_pages' => 'min:1|integer|nullable',
             'isbn' => 'size:13|nullable',
-            'published_date' => 'required'
+            'published_date' => 'required',
+            // 'cover_image' => 'regex'.$urlRegex
         ]);
 
         $book->update([
@@ -139,7 +144,10 @@ class BookController extends Controller
             'synopsis' => $request->synopsis,
             'no_pages' => $request->no_pages,
             'isbn' => $request->isbn,
-            'published_date' => $request->published_date
+            'published_date' => $request->published_date,
+            'author' => $request->author,
+            'user_id' => 1,
+            'cover_image' => $request->cover_image
 
         ]);
 

@@ -83,7 +83,9 @@
                 :value="@old('cover_image')" ></x-input>
 
             <br/>
-            <x-button class="mt-6 block">Save Book</x-button>
+            <x-button class="mt-6 block btn-link">Save Book</x-button>
+            <a class=" btn-link btn-danger" href="{{ route('books.index') }}">Cancel</a>
+
         </form>
     </article>
 

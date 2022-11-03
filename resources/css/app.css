@@ -4,7 +4,7 @@
 
 
 section {
-    margin: 30px 0;
+    margin: 10px 0;
     padding: 20px;
 }
 
@@ -54,18 +54,22 @@ h3 {
 }
 
 .btn-link {
-        @apply inline-block px-4 py-2 bg-emerald-700 rounded-md font-bold text-sm text-white uppercase tracking-widest hover:bg-emerald-800 active:bg-emerald-900 focus:ring ring-emerald-300;
-    }
-
-.btn-link:hover{
-    hover:bg-emerald-800;
+    @apply inline-block px-4 py-2 bg-emerald-700 rounded-md font-bold text-sm text-white uppercase tracking-widest hover:bg-emerald-800 active:bg-emerald-900 focus:ring ring-emerald-300;
 }
 
+/* .btn-link:hover{
+    hover:bg-emerald-800;
+} */
+
+.btn-danger {
+    @apply bg-red-600 hover:bg-red-700 active:bg-red-700 ring-red-300;
+}
 
 .cover-image{
     --widthI: 100%;
     height: calc(var(--widthI)*1.5)
 }
+
 
 @layer components {
     .btn-link {

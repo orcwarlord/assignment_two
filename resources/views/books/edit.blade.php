@@ -45,17 +45,6 @@
                 aria-placeholder="author"></x-input>
 
 
-            <x-input-label for="isbn" class="mt-6">ISBN 13</x-input-label>
-            <x-input
-                type="text"
-                name="isbn"
-                field="isbn"
-                id=""
-                placeholder="XXXXXXXXXXXXX"
-                aria-placeholder="13 digit ISBN number"
-                :value="@old('isbn', $book->isbn)" ></x-input>
-
-
             <x-input-label for="no_pages" class="mt-6">Number of Pages</x-input-label>
             <x-input
                 type="number"
@@ -72,7 +61,17 @@
                 name="published_date"
                 field="published_date"
                 aria-placeholder="Date of Publication"
-                :value="@old('published_date', $book->published_date)"></x-input>
+                :value="@old('published_date', $book->published_date->format('Y-m-d'))"></x-input>
+
+            <x-input-label for="isbn" class="mt-6">ISBN 13</x-input-label>
+            <x-input
+                type="text"
+                name="isbn"
+                field="isbn"
+                id=""
+                placeholder="XXXXXXXXXXXXX"
+                aria-placeholder="13 digit ISBN number"
+                :value="@old('isbn', $book->isbn)" ></x-input>
 
             <x-input-label for="cover_image" class="mt-6">Cover Image Link</x-input-label>
             <x-input
@@ -85,6 +84,7 @@
 
             <br/>
             <x-button class="mt-6 block">Save Book</x-button>
+            <a class=" btn-link btn-danger" href="{{ route('books.show',$book) }}">Cancel</a>
         </form>
     </article>
 
