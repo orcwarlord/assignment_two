@@ -14,17 +14,13 @@
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="font-sans antialiased bg-emerald-100">
-        <div class="min-h-screen bg-emerald-100 max-w-screen-xl mx-auto">
+        <!-- Page Heading -->
 
-
-            <!-- Page Heading -->
-            {{-- @if (isset($header)) --}}
-                <header class="bg-white shadow ">
+        <div class="w-full bg-white">
+            <header class="bg-white shadow-sm max-w-screen-xl mx-auto">
                 <nav class="bg-white shadow flex justify-between py-4">
-
                         <!-- Logo -->
-
-                        <div class="shrink-0 flex  items-center">
+                    <div class="shrink-0 flex  items-center">
                         <a href="{{ route('books.index') }}">
                             <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
                         </a>
@@ -43,14 +39,46 @@
                                 @endauth
                             </div>
                         @endif
-
                     </div>
                 </nav>
-
                 <h1 class="text-3xl mt-5 pb-5 px-4">{{ $title }}</h1>
+            </header>
+        </div>
+        <div class="min-h-screen bg-emerald-100 max-w-screen-xl mx-auto">
+
+
+        {{-- <!-- Page Heading -->
+
+        <div class="w-full bg-white">
+            <header class="bg-white shadow ">
+            <nav class="bg-white shadow flex justify-between py-4">
+                    <!-- Logo -->
+                <div class="shrink-0 flex  items-center">
+                    <a href="{{ route('books.index') }}">
+                        <x-application-logo class="block h-10 w-auto fill-current text-gray-600" />
+                    </a>
+                    <h1 class="ml-5 text-lg md:text-xl lg:text-2xl">BonusLibris</h1>
+                </div>
+                <div class="relative flex items-top justify-center h-12 bg-emerald-40 dark:bg-gray-900 sm:items-center  sm:pt-0">
+                    @if (Route::has('login'))
+                        <div class=" ">
+                            @auth
+                                <a href="{{ route('books.index') }}" class="btn-link ">Books</a>
+                            @else
+                                <a href="{{ route('login') }}" class="btn-link mr-1">Log in</a>
+                                @if (Route::has('register'))
+                                    <a href="{{ route('register') }}" class="btn-link">Register</a>
+                                @endif
+                            @endauth
+                        </div>
+                    @endif
+                </div>
+            </nav>
+            <h1 class="text-3xl mt-5 pb-5 px-4">{{ $title }}</h1>
 
 
                 </header>
+        </div> --}}
 
 
 

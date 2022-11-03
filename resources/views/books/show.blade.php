@@ -40,7 +40,7 @@
 
     </article>
     <div class="flex justify-between w-full">
-            <a href="{{ route('books.index', $book) }}" class="btn-link ">Admin Home</a>
+            <a href="{{ route('books.index', $book) }}" class="btn-link ">Back to Books</a>
             <a href="{{ route('books.edit', $book) }}" class="btn-link ">Edit Book</a>
             <form action="{{ route('books.destroy', $book) }}" method="post">
                 @method('delete')
