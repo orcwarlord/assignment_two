@@ -20,18 +20,16 @@ class BookController extends Controller
     {
 
         $userLevel = Auth::user()->userlevel;
+        // User functionality to be implemented
         if ($userLevel === 'user') {
             return view('books.indexUser');
         }
         else {
-
-            //Most recently created
+            //Sort by most recently created
             $books = Book::orderBy('created_at', 'desc')->paginate(20);
 
             // Using the helper method (same as following example.
             return view('books.indexAdmin')->with('books', $books);
-
-
         }
     }
 
@@ -92,23 +90,7 @@ class BookController extends Controller
         return view('books.show', [
             'book' => $book
         ]);
-
-        // dd($book);
     }
-
-    // /**
-    //  * Display the specified resource.
-    //  *
-    //  * @param  \App\Models\Book  $book
-    //  * @return \Illuminate\Http\Response
-    //  */
-    // public function show($uuid)
-    // {
-    //     $book = Book::where('uuid', $uuid);
-    //     return view('books.show')->with('book', $book);
-    // }
-
-
 
     /**
      * Show the form for editing the specified resource.

@@ -60,10 +60,9 @@ class BookSeeder extends Seeder
 
         seedJson($resTPB, $faker);
 
+        // Citation adapted from (Castelo, 2017)
 
-
-
-       //Original using Factory - do not selete.
+       //Original using Factory - do not delete.
 
         // return [
         //     'uuid' => Uuid::uuid4()->toString(),
@@ -75,3 +74,5 @@ class BookSeeder extends Seeder
     }
 }
 
+//Reference
+// Castelo, A. (2017). Laravel API Tutorial: How to Build and Test a RESTful API. TopTal. Retrieved 27/10/2022 from https://www.toptal.com/laravel/restful-laravel-api-tutorial

@@ -19,11 +19,12 @@ class Book extends Model
         'published_date'
     ];
 
+    // Use UID in URL rather than ID
     public function getRouteKeyName()
     {
         return 'uuid';
     }
-
+    // Relationship with user table
     public function user(){
         return $this->belongsTo(User::class);
     }

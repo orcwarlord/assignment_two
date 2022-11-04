@@ -19,7 +19,6 @@ use function GuzzleHttp\json_decode;
 |
 */
 
-
 Route::get('/', [WelcomeController::class, 'index']);
 
 
@@ -39,32 +38,16 @@ Route::resource('/books', BookController::class)->middleware(['auth']);
 // });
 
 Route::get('/apitest', function () {
-    // $response = Http::get('https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=0DKnlFF1aAlhv2bAmho7T3iQVwZy4RI4');
-    // dd($response);
+
 
     $client = new GuzzleHttp\Client();
-    // $res = $client->request('GET', 'https://api.nytimes.com/svc/books/v3/lists/best-sellers/history.json?offset=40&api-key=0DKnlFF1aAlhv2bAmho7T3iQVwZy4RI4');
-
-    //  $res = $client->request('GET', 'https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=0DKnlFF1aAlhv2bAmho7T3iQVwZy4RI4');
 
     $res = $client->request('GET', 'https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=0DKnlFF1aAlhv2bAmho7T3iQVwZy4RI4');
-
-    // echo $res->getStatusCode();
-    // // "200"
-    // echo $res->getHeader('content-type')[0];
-    // // 'application/json; charset=utf8'
 
     $body = json_decode($res->getBody()->getContents());
 
     // dd($res->getBody());
     echo $res->getBody();
-
-    // dd($body);
-
-    // foreach ($body->results as $book) {
-    //     echo $book->title;
-    //     echo $book->description;
-    // }
 
 
 });

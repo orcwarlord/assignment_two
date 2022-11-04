@@ -18,6 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        // 2 aadmin users adn 4 random user level
         User::factory()
             ->count(1)
             ->create([
