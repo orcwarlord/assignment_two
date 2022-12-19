@@ -2,6 +2,7 @@
 
 use Faker\Factory;
 use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\WelcomeController;
@@ -52,6 +53,9 @@ Route::get('/apitest', function () {
 
 });
 
+Route::resource('/books', BookController::class)->middleware(['auth']);
 
+Route::resource('books.comments', 'CommentController');
+// ->only(['store', 'update', 'destroy'])->middleware('auth')
 
 require __DIR__.'/auth.php';
