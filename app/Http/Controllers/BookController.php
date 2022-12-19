@@ -20,13 +20,14 @@ class BookController extends Controller
     {
 
         $userLevel = Auth::user()->userlevel;
+        $books = Book::orderBy('created_at', 'desc')->paginate(20);
         // User functionality to be implemented
         if ($userLevel === 'user') {
-            return view('books.indexUser');
+            return view('books.indexUser')->with('books', $books);
         }
         else {
             //Sort by most recently created
-            $books = Book::orderBy('created_at', 'desc')->paginate(20);
+
 
             // Using the helper method (same as following example.
             return view('books.indexAdmin')->with('books', $books);

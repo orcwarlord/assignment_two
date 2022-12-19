@@ -18,7 +18,7 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        // 2 aadmin users adn 4 random user level
+        // 2 admin users, `1 user` user and 4 random user level
         User::factory()
             ->count(1)
             ->create([
@@ -36,6 +36,15 @@ class UserSeeder extends Seeder
             'password' => Hash::make('password'),
             'userlevel' => 'admin',
         ]);
+
+        User::factory()
+            ->count(1)
+            ->create([
+                'name' => 'Test User 1',
+                'email' => 'testuser1@testuser.com',
+                'password' => Hash::make('password'),
+                'userlevel' => 'user',
+            ]);
 
         User::factory()
             ->count(4)

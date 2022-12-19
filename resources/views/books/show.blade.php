@@ -17,8 +17,6 @@
                 <strong>Updated: </strong>{{ $book->updated_at->diffForHumans() }}
             </p>
         </div>
-
-
     </div>
     <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-sm sm:rounded-lg">
         <h2 class="font-bold text-4xl text-gray-800 leading-tight">
