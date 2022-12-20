@@ -55,7 +55,7 @@ Route::get('/apitest', function () {
 
 Route::resource('/books', BookController::class)->middleware(['auth']);
 
-Route::resource('books.comments', 'CommentController');
+// Route::resource('books.comments', 'CommentController');
 // ->only(['store', 'update', 'destroy'])->middleware('auth')
 
 require __DIR__.'/auth.php';

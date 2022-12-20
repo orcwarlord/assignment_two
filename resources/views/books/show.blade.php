@@ -35,6 +35,14 @@
                 <p class="mt-6"><span class="inline-block w-40 font-semibold">ISBN: </span>{{ $book->isbn }}</p>
             </div>
         </div>
+        <h2>Comments</h2>
+
+        @foreach($comments as $comment)
+            <div class="comment pt-10 bg-slate-100">
+                <p>{{ $comment->body }}</p>
+            </div>
+        @endforeach
+
 
     </article>
     <div class="flex justify-between w-full">

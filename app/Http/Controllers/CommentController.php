@@ -17,10 +17,10 @@ class CommentController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function create(Book $book)
-    {
-        return view('comments.create', compact('book'));
-    }
+    // public function create(Book $book)
+    // {
+    //     return view('comments.create', compact('book'));
+    // }
 
     /**
      * Store a newly created comment in storage.
@@ -29,19 +29,19 @@ class CommentController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Book $book)
-    {
-        $validatedData = $request->validate([
-            'body' => 'required|max:255',
-        ]);
+    // public function store(Request $request, Book $book)
+    // {
+    //     $validatedData = $request->validate([
+    //         'body' => 'required|max:1000',
+    //     ]);
 
-        $comment = new Comment();
-        $comment->body = $validatedData['body'];
-        $comment->book_id = $book->id;
-        $comment->save();
+    //     $comment = new Comment();
+    //     $comment->body = $validatedData['body'];
+    //     $comment->book_id = $book->id;
+    //     $comment->save();
 
-        return redirect()->route('books.show', $book->id);
-    }
+    //     return redirect()->route('books.show', $book->id);
+    // }
 
     /**
      * Display a listing of comments for the specified book.
@@ -53,7 +53,7 @@ class CommentController extends Controller
     {
         $comments = $book->comments()->paginate();
 
-        return view('comments.index', compact('book', 'comments'));
+        return view('books.index', compact('book', 'comments'));
     }
 
     /**
@@ -63,10 +63,10 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Book $book, Comment $comment)
-    {
-        return view('comments.edit', compact('book', 'comment'));
-    }
+    // public function edit(Book $book, Comment $comment)
+    // {
+    //     return view('comments.edit', compact('book', 'comment'));
+    // }
 
     /**
      * Update the specified comment in storage.
@@ -76,17 +76,17 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Book $book, Comment $comment)
-    {
-        $validatedData = $request->validate([
-            'body' => 'required|max:1000',
-        ]);
+    // public function update(Request $request, Book $book, Comment $comment)
+    // {
+    //     $validatedData = $request->validate([
+    //         'body' => 'required|max:1000',
+    //     ]);
 
-        $comment->body = $validatedData['body'];
-        $comment->save();
+    //     $comment->body = $validatedData['body'];
+    //     $comment->save();
 
-        return redirect()->route('books.show', $book->id);
-    }
+    //     return redirect()->route('books.show', $book->id);
+    // }
 
     /**
      * Remove the specified comment from storage.
@@ -95,11 +95,11 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Book $book, Comment $comment)
-    {
-        $comment->delete();
+    // public function destroy(Book $book, Comment $comment)
+    // {
+    //     $comment->delete();
 
-        return redirect();
+    //     return redirect();
 
-    }
+    // }
 }

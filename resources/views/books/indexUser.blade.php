@@ -34,7 +34,7 @@
             </div>
             <h3>Comments</h3>
             <div class="flex flex-row justify-between">
-                <a href="{{ route('books.comments') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
+                {{-- <a href="{{ route('books.comments') }}" class="btn-link btn-lg mb-2">+ Add a Book</a> --}}
             </div>
             @if ($book->comments->count() > 0)
                 <ul>
