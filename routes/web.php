@@ -54,8 +54,10 @@ Route::get('/apitest', function () {
 
 });
 
-
+// Route::post('/comments/store', 'CommentController@store')->name('comment.add');
 
 Route::resource('books.comments', 'App\Http\Controllers\CommentController')->only(['store', 'update', 'destroy'])->middleware('auth');
+
+
 
 require __DIR__.'/auth.php';

@@ -90,15 +90,10 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        $comments = $book->comments;
-
+        $comments = $book-> comments->sortByDesc('created_at')->values()->all();
 
         return view('books.show', compact('book', 'comments'));
-        // $username = Book::with(user);
-        // return view('books.show', [
-        //     'book' => $book
 
-        // ]);
     }
 
     /**

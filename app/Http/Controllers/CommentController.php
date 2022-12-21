@@ -31,17 +31,25 @@ class CommentController extends Controller
      */
     public function store(Request $request, Book $book)
     {
-        $validatedData = $request->validate([
+
+        // Validate the request data
+        $request->validate([
             'body' => 'required|min:10|max:1000',
         ]);
 
+        // Create a new comment instance
         $comment = new Comment();
         $comment->body = $request->input('body');
         $comment->book_id = $book->id;
-        $comment->user_id = auth()->id;
+        $comment->user_id = auth()->id();
+        // $comment->user_id = 1;
+
+        // Save the comment to the database
         $comment->save();
 
-        return redirect()->route('books.show', $book->id);
+        // Redirect the user back to the book page
+        return redirect()->route('books.show', $book);
+
     }
 
     /**

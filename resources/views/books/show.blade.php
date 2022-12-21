@@ -35,21 +35,28 @@
                 <p class="mt-6"><span class="inline-block w-40 font-semibold">ISBN: </span>{{ $book->isbn }}</p>
             </div>
         </div>
-        <h2>Comments</h2>
-        {{-- <form action="{{ route('books.comments.store') }}" method="POST"> --}}
-        <form action="{{ route('comment.add') }}" method="POST">
+        <form action="/books/{{ $book->uuid }}/comments" method="POST">
             @csrf
             <label for="body">Comment:</label><br>
-            <textarea id="body" name="body"></textarea><br>
-             <input type="hidden" name="book_id" value="{{ $book->id }}" />
-            {{-- <button type="submit" class="btn btn-warning">Submit</button> --}}
-            <input type="submit" class="btn btn-warning" value="Add Comment" />
+            <x-textarea id="body" name="body" rows="5" placeholder="Add a comment" class="w-full mt-2"></x-textarea><br>
+            <input type="hidden" name="book_id" value="{{ $book->id }}" />
+            <button type="submit" class="btn-lg mb-2 btn-link">Submit</button>
         </form>
 
+
         @foreach($comments as $comment)
-            <div class="comment pt-10 bg-slate-100">
-                <p>Contributed by: {{ $comment->user->name }}</p>
-                <p>{{ $comment->body }}</p>
+            <div class="comment my-3 p-5 rounded bg-slate-100 drop-shadow-md">
+                <div class="flex justify-between">
+
+
+                <p class="font-semibold">{{ $comment->user->name }}</p>
+                <p class="opacity-70  ml-8">
+                        {{ $comment->created_at->diffForHumans() }}
+                    </p>
+
+
+            </div>
+            <p>{{ $comment->body }}</p>
             </div>
         @endforeach
 
