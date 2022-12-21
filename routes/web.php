@@ -58,6 +58,6 @@ Route::get('/apitest', function () {
 
 Route::resource('books.comments', 'App\Http\Controllers\CommentController')->only(['store', 'update', 'destroy'])->middleware('auth');
 
-
+// Route::delete('comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 
 require __DIR__.'/auth.php';

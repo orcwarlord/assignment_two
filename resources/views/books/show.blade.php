@@ -55,9 +55,23 @@
                     </p>
 
 
+                </div>
+                <div class="flex justify-between">
+                    <p>{{ $comment->body }}</p>
+                    @if (Auth::user() && Auth::user()->id === $comment->user_id)
+                        <form action="/books/{{ $book->uuid }}/comments/{{ $comment->id }}" method="POST">
+                        {{-- <a class="btn btn-blue"
+                        href="{{ route('visitors.edit', $visitor->id) }}">Edit</a> --}}
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-red btn-
+                        link ml-5">Delete</button>
+                        </form>
+                    @endif
+                </div>
             </div>
-            <p>{{ $comment->body }}</p>
-            </div>
+
+
         @endforeach
 
 

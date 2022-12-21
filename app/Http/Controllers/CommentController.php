@@ -104,11 +104,11 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    // public function destroy(Book $book, Comment $comment)
-    // {
-    //     $comment->delete();
+    public function destroy(Book $book, Comment $comment)
+    {
+        $comment->delete();
 
-    //     return redirect();
+        return redirect()->route('books.show', $book);
 
-    // }
+    }
 }

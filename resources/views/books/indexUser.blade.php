@@ -30,6 +30,7 @@
             <div class="flex flex-col justify-between">
                 <p>{{ $book->comments->count() }} comments</p>
                 <p class="text-center"><a href="{{ route('books.show', $book) }}" class="btn-link btn-lg mb-2 text-center">Book Details</a></p>
+
             </div>
 
         </article>
