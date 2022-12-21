@@ -36,16 +36,26 @@
             </div>
         </div>
         <h2>Comments</h2>
+        {{-- <form action="{{ route('books.comments.store') }}" method="POST"> --}}
+        <form action="{{ route('comment.add') }}" method="POST">
+            @csrf
+            <label for="body">Comment:</label><br>
+            <textarea id="body" name="body"></textarea><br>
+             <input type="hidden" name="book_id" value="{{ $book->id }}" />
+            {{-- <button type="submit" class="btn btn-warning">Submit</button> --}}
+            <input type="submit" class="btn btn-warning" value="Add Comment" />
+        </form>
 
         @foreach($comments as $comment)
             <div class="comment pt-10 bg-slate-100">
+                <p>Contributed by: {{ $comment->user->name }}</p>
                 <p>{{ $comment->body }}</p>
             </div>
         @endforeach
 
 
     </article>
-    <div class="flex justify-between w-full">
+    {{-- <div class="flex justify-between w-full">
             <a href="{{ route('books.index', $book) }}" class="btn-link ">Back to Books</a>
             <a href="{{ route('books.edit', $book) }}" class="btn-link ">Edit Book</a>
             <form action="{{ route('books.destroy', $book) }}" method="post">
@@ -53,7 +63,7 @@
                 @csrf
                 <button type="submit" class="btn btn-danger ml-4" onclick="return confirm('Are you sure you want to delete this book?')">Delete Book</button>
             </form>
-        </div>
+        </div> --}}
 
 @endsection
 

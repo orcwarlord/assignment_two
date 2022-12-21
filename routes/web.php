@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Http;
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 
 use function GuzzleHttp\json_decode;
@@ -53,9 +54,8 @@ Route::get('/apitest', function () {
 
 });
 
-Route::resource('/books', BookController::class)->middleware(['auth']);
 
-// Route::resource('books.comments', 'CommentController');
-// ->only(['store', 'update', 'destroy'])->middleware('auth')
+
+Route::resource('books.comments', 'App\Http\Controllers\CommentController')->only(['store', 'update', 'destroy'])->middleware('auth');
 
 require __DIR__.'/auth.php';

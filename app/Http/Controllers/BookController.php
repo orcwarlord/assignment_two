@@ -21,7 +21,7 @@ class BookController extends Controller
     {
 
         $userLevel = Auth::user()->userlevel;
-        $books = Book::orderBy('created_at', 'desc')->paginate(20);
+        $books = Book::with('comments')->orderBy('created_at', 'desc')->paginate(20);
         // $comments = $books->comments;
         // User functionality to be implemented
         if ($userLevel === 'user') {
@@ -91,6 +91,8 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $comments = $book->comments;
+
+
         return view('books.show', compact('book', 'comments'));
         // $username = Book::with(user);
         // return view('books.show', [

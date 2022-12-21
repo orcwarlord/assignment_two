@@ -29,19 +29,20 @@ class CommentController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request, Book $book)
-    // {
-    //     $validatedData = $request->validate([
-    //         'body' => 'required|max:1000',
-    //     ]);
+    public function store(Request $request, Book $book)
+    {
+        $validatedData = $request->validate([
+            'body' => 'required|min:10|max:1000',
+        ]);
 
-    //     $comment = new Comment();
-    //     $comment->body = $validatedData['body'];
-    //     $comment->book_id = $book->id;
-    //     $comment->save();
+        $comment = new Comment();
+        $comment->body = $request->input('body');
+        $comment->book_id = $book->id;
+        $comment->user_id = auth()->id;
+        $comment->save();
 
-    //     return redirect()->route('books.show', $book->id);
-    // }
+        return redirect()->route('books.show', $book->id);
+    }
 
     /**
      * Display a listing of comments for the specified book.
@@ -49,12 +50,12 @@ class CommentController extends Controller
      * @param  \App\Book  $book
      * @return \Illuminate\Http\Response
      */
-    public function index(Book $book)
-    {
-        $comments = $book->comments()->paginate();
+    // public function index(Book $book)
+    // {
+    //     $comments = $book->comments()->paginate();
 
-        return view('books.index', compact('book', 'comments'));
-    }
+    //     return view('books.index', compact('book', 'comments'));
+    // }
 
     /**
      * Show the form for editing the specified comment.

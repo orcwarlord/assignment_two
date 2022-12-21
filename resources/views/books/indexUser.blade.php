@@ -23,28 +23,22 @@
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">Date Published:</span>{{ ($book->published_date)->format('jS F Y') }}</p>
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">ISBN:</span>{{ $book->isbn }}</p>
                 <span class="block opacity-70 text-sm mt-4">Updated: {{ $book->updated_at->diffForHumans()}}. Created: {{ $book->created_at->diffForHumans()}}</span>
-                {{-- <div class="flex flex-row justify-between mt-5 ">
+                <div class="flex flex-row justify-between mt-5 ">
                     <a href="{{ route('books.edit', $book) }}" class="btn-link">Edit Book</a>
                     <form action="{{ route('books.destroy', $book) }}" method="post">
                         @method('delete')
                         @csrf
                         <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this book?')">Delete Book</button>
                     </form>
-                </div> --}}
+                </div>
             </div>
-            <h3>Comments</h3>
+
+
             <div class="flex flex-row justify-between">
-                {{-- <a href="{{ route('books.comments') }}" class="btn-link btn-lg mb-2">+ Add a Book</a> --}}
+                <p>{{ $book->comments->count() }} comments</p>
+                <a href="{{ route('books.show', $book) }}" class="btn-link btn-lg mb-2">Book Details</a>
             </div>
-            @if ($book->comments->count() > 0)
-                <ul>
-                    @foreach ($book->comments as $comment)
-                        <li>{{ $comment->content }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No comments for this post.</p>
-            @endif
+
         </article>
 
     @endforeach
