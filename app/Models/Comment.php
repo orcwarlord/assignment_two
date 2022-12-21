@@ -9,14 +9,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Comment extends Model
 {
+    use HasFactory;
     // The fields that are mass assignable
     protected $fillable = [
-        'post_id',
+        'book_id',
         'user_id',
-        'content',
+        'body',
     ];
 
-    // The comment belongs to a post
+    // The comment belongs to a book
     public function book()
     {
         return $this->belongsTo(Book::class);

@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Book;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
+// use App\Http\Controllers\BookController;
 
 
 class BookController extends Controller
@@ -20,10 +21,12 @@ class BookController extends Controller
     {
 
         $userLevel = Auth::user()->userlevel;
-        $books = Book::orderBy('created_at', 'desc')->paginate(20);
+        $books = Book::with('comments')->orderBy('created_at', 'desc')->paginate(20);
+        // $comments = $books->comments;
         // User functionality to be implemented
         if ($userLevel === 'user') {
             return view('books.indexUser')->with('books', $books);
+
         }
         else {
             //Sort by most recently created
@@ -87,10 +90,10 @@ class BookController extends Controller
      */
     public function show(Book $book)
     {
-        // $username = Book::with(user);
-        return view('books.show', [
-            'book' => $book
-        ]);
+        $comments = $book-> comments->sortByDesc('created_at')->values()->all();
+
+        return view('books.show', compact('book', 'comments'));
+
     }
 
     /**
