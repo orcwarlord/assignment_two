@@ -11,7 +11,10 @@
     {{-- <div class="flex flex-row justify-between">
         <a href="{{ route('books.create') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
     </div> --}}
-
+    <form action="{{ route('books.index') }}" method="GET">
+        <x-input class="w-4/5" type="text" name="search" placeholder="Search..."></x-input>
+        <button class="btn btn-link" type="submit">Search</button>
+    </form>
     @foreach ($books as $book)
         <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-sm sm:rounded-lg flex flex-col sm:flex-row">
             <p class='flex items-center justify-center w-full sm:w-1/4 md:w-1/6 lg:w-1/12 h-auto'><a href="{{ route('books.show', $book)}}"><img src="{{ $book->cover_image }}" width="500px" alt="{{ $book->title }} book cover" class=""></a></p>
@@ -32,19 +35,12 @@
                     </form>
                 </div> --}}
             </div>
-            <h3>Comments</h3>
-            <div class="flex flex-row justify-between">
-                <a href="{{ route('comments.create') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
+            <div class="flex flex-col justify-between">
+                <p>{{ $book->comments->count() }} comments</p>
+                <p class="text-center"><a href="{{ route('books.show', $book) }}" class="btn-link btn-lg mb-2 text-center">Book Details</a></p>
+
             </div>
-            @if ($book->comments->count() > 0)
-                <ul>
-                    @foreach ($book->comments as $comment)
-                        <li>{{ $comment->content }}</li>
-                    @endforeach
-                </ul>
-            @else
-                <p>No comments for this post.</p>
-            @endif
+
         </article>
 
     @endforeach

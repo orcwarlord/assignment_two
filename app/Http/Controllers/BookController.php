@@ -16,11 +16,20 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
 
         $userLevel = Auth::user()->userlevel;
-        $books = Book::orderBy('created_at', 'desc')->paginate(20);
+
+
+
+        // $books = Book::orderBy('created_at', 'desc')->paginate(20);
+        $books = Book::when($request->search, function ($query) use ($request) {
+            return $query->where('title', 'like', '%' . $request->search . '%')-> orWhere('author', 'like', '%' . $request->search . '%');
+        })
+        ->paginate(20);
+
+
         // User functionality to be implemented
         if ($userLevel === 'user') {
             return view('books.indexUser')->with('books', $books);
