@@ -25,6 +25,9 @@ class BookFactory extends Factory
             'synopsis' => $this->faker->realText(500),
             'isbn' => $this->faker->isbn13(),
             'published_date' => now(),
+            'author' => $this->faker->name,
+            'id' =>  $this->faker->unique()->randomNumber,
+            'user_id' => '1'
         ];
     }
 }

@@ -2,8 +2,10 @@
 
 use Faker\Factory;
 use Illuminate\Support\Facades\Http;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\WelcomeController;
 
 use function GuzzleHttp\json_decode;
@@ -52,6 +54,10 @@ Route::get('/apitest', function () {
 
 });
 
+// Route::post('/comments/store', 'CommentController@store')->name('comment.add');
 
+Route::resource('books.comments', 'App\Http\Controllers\CommentController')->only(['store', 'update', 'destroy'])->middleware('auth');
+
+// Route::delete('comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 
 require __DIR__.'/auth.php';
