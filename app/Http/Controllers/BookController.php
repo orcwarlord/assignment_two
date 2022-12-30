@@ -7,11 +7,6 @@ use App\Models\Book;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
-
-
-
-
 
 class BookController extends Controller
 {
