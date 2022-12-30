@@ -7,6 +7,9 @@ use App\Models\Book;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Input;
+
+
 
 
 
@@ -19,15 +22,18 @@ class BookController extends Controller
      */
     public function index(Request $request)
     {
+        $search = $request->get('search');
 
+        // dd($search);
         $userLevel = Auth::user()->userlevel;
+
         $books = Book::when($request->search, function ($query) use ($request) {
             return $query->where('title', 'like', '%' . $request->search . '%')->orWhere('author', 'like', '%' . $request->search . '%');
         })
         ->paginate(20);
         // User functionality to be implemented
         if ($userLevel === 'user') {
-            return view('books.indexUser')->with('books', $books);
+            return view('books.indexUser', compact('books', 'search'));
 
         }
         else {
