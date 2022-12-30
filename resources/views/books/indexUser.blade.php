@@ -8,9 +8,19 @@
         {{ session('success') }}
     </x-alert-success>
 
-    {{-- <div class="flex flex-row justify-between">
-        <a href="{{ route('books.create') }}" class="btn-link btn-lg mb-2">+ Add a Book</a>
-    </div> --}}
+    <form action="{{ route('books.index') }}" id="search" method="GET" class="flex justify-between">
+        @csrf
+
+        <x-input class="w-4/5" type="text" name="search" placeholder="Search..." ></x-input>
+        <button class="btn btn-link" type="submit">Search</button>
+        <button class="btn btn-red" onclick="resetForm()">Clear</button>
+
+    </form>
+    @if ($search <> "")
+        <p>You searched for: {{ $search }}
+    @endif
+
+
 
     @foreach ($books as $book)
         <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-md sm:rounded-lg flex flex-col sm:flex-row">
@@ -39,4 +49,16 @@
 
     {{ $books->links()}}
 
+
+    <script>
+
+
+        function resetForm(){
+            let $search = document.getElementById('search');
+            // console.log($search);
+            // return;
+            $search.value="";
+            // $search.submit();
+        }
+    </script>
 @endsection
