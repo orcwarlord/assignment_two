@@ -7,25 +7,34 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Comment extends Model
+
+class Like extends Model
 {
     use HasFactory;
-    // The fields that are mass assignable
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
     protected $fillable = [
-        'book_id',
-        'user_id',
-        'body',
+        'book_id', 'user_id', 'type',
     ];
 
-    // The comment belongs to a book
+    /**
+     * Get the post that the like belongs to.
+     */
     public function book()
     {
         return $this->belongsTo(Book::class);
     }
 
-    // The comment belongs to a user
+    /**
+     * Get the user that liked or disliked the post.
+     */
     public function user()
     {
         return $this->belongsTo(User::class);
     }
 }
+

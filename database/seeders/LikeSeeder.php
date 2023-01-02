@@ -3,11 +3,12 @@
 namespace Database\Seeders;
 
 use App\Models\Comment;
+use App\Models\Like;
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 
-class CommentSeeder extends Seeder
+class LikeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -16,8 +17,8 @@ class CommentSeeder extends Seeder
      */
     public function run()
     {
-        Comment::factory()
-            ->count(200)
+        Like::factory()
+            ->count(1200)
             ->create();
     }
 }

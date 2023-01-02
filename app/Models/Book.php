@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Like;
 use App\Models\Comment;
 use Illuminate\Foundation\Auth\User;
 use Illuminate\Database\Eloquent\Model;
@@ -35,6 +36,15 @@ class Book extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    // The book has many likes and dislikes
+
+    public function likes()
+    {
+        return $this->hasMany(Like::class);
+    }
+
+
 }
 
 
