@@ -36,7 +36,23 @@
 
             </div>
 
+            <div><p>
+                Up votes: {{ $book->up_votes }}<br>
+                Down votes: {{ $book->down_votes }}
+                </p>
 
+                <form action="{{ route('books.upvote', $book->id) }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn">Up Vote</button>
+                </form>
+
+                <form action="{{ route('books.downvote', $book->id) }}" method="POST">
+                @csrf
+
+                <button type="submit" class="btn">Down Vote</a>
+                </form>
+            </div>
             <div class="flex flex-col justify-between">
                 <p>{{ $book->comments->count() }} comments</p>
                 <p class="text-center"><a href="{{ route('books.show', $book) }}" class="btn-link btn-lg mb-2 text-center">Book Details</a></p>

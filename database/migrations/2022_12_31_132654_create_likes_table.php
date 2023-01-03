@@ -11,20 +11,17 @@ class CreateLikesTable extends Migration
      *
      * @return void
      */
-    public function up()
-    {
+    public function up() {
         Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('book_id');
-            $table->unsignedBigInteger('user_id');
-            $table->string('type');
-            // $table->boolean('is_up')->default(true);
+            $table->foreignId('book_id')->constrained();
+            $table->foreignId('user_id')->constrained();
+            $table->boolean('is_up')->default(true);
             $table->timestamps();
-
-            $table->foreign('book_id')->references('id')->on('books');
-            $table->foreign('user_id')->references('id')->on('users');
         });
-    }
+        }
+
+
 
     /**
      * Reverse the migrations.

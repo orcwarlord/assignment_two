@@ -18,7 +18,7 @@ class Like extends Model
      * @var array
      */
     protected $fillable = [
-        'book_id', 'user_id', 'type',
+        'user_id', 'is_up',
     ];
 
     /**

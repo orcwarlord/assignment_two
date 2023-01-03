@@ -27,18 +27,46 @@ class LikeFactory extends Factory
 
 
 
-     public function definition()
+    public function getLikeData()
     {
-        $bookIds = Book::pluck('id')->all();
-        $randomBookId = Arr::random($bookIds);
-        $userIds = User::pluck('id')->all();
-        $randomUserId = Arr::random($userIds);
-        return [
-            'book_id' => $randomBookId,
-            'user_id' => $randomUserId,
-            // 'type' => $this->faker->realText(500),
-            'type' => $this->faker->randomElement(['like','dislike']),
 
+        $book = Book::all()->random();
+        $user = User::all()->random();
+
+        return [
+            'book_id' => $book->{$book->getKeyName()},
+            'user_id' => $user->{$user->getKeyName()},
+            'is_up' => $this->faker->boolean
         ];
+
     }
+
+    public function likeExists($likeData)
+    {
+        return Like::where([
+            'book_id' => $likeData['book_id'],
+            'user_id' => $likeData['user_id']
+        ])->exists();
+    }
+
+    public function getValidLikeData()
+    {
+        $likeData = false;
+
+        while ($likeData === false) {
+            $likeData = $this->getLikeData();
+
+            if ($this->likeExists($likeData)) {
+                $likeData = false;
+            }
+        }
+
+        return $likeData;
+    }
+
+    public function definition()
+    {
+        return $this->getValidLikeData();
+    }
+
 }
