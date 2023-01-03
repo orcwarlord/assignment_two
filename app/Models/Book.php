@@ -69,6 +69,7 @@ class Book extends Model
         return $query->withCount([
             'likes AS up_likes' => function (Builder $query) {
                 $query->where('is_up', true);
+
             },
             'likes AS down_likes' => function (Builder $query) {
                 $query->where('is_up', false);

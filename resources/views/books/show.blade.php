@@ -19,9 +19,42 @@
         </div>
     </div>
     <article class="my-6 p-6 bg-white border-b border-gray-400 shadow-sm sm:rounded-lg">
-        <h2 class="font-bold text-4xl text-gray-800 leading-tight">
-            {{ $book->title }}
-        </h2>
+        <div class="flex flex-col md:flex-row justify-between">
+            <h2 class="font-bold text-4xl text-gray-800 leading-tight">
+                {{ $book->title }}
+            </h2>
+            <div class="flex">
+                <p class="pr-0.5">
+                            <form action="{{ route('books.uplike', $book->uuid) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-small hover:text-orange-700">
+                                    <span class="fa-stack ">
+                                        <i class="fas fa-circle fa-stack-2x text-orange-500 hover:text-orange-700"></i>
+                                        <i class="fas fa-thumbs-up fa-stack-1x"></i>
+                                    </span>
+                                </button>
+                                <span class="pr-4 -ml-4">{{ $book->up_likes }}</span>
+                            </form>
+
+                        </p>
+                        <span class="w-5"></span>
+                        <p class="pr-0.5 bg-slate-300">
+                        <form action="{{ route('books.downlike', $book->uuid) }}" method="POST">
+                            @csrf
+
+                            <button type="submit" class="btn  hover:text-orange-700">
+                                <span class="fa-stack ">
+                                    <i class="fas fa-circle fa-stack-2x text-orange-500 "></i>
+                                    <i class="fas fa-thumbs-down fa-stack-1x"></i>
+                                </span>
+
+                            </button>
+                            <span class="pr-4 -ml-4 ">{{ $book->down_likes }}</span>
+                        </form>
+                        </p>
+            </div>
+        </div>
+
         <div class="grid grid-cols-1  md:grid-cols-[1fr_2fr] lg:grid-cols-[1fr_3fr]"" >
 
                 <p class='flex items-center justify-center w-full  h-auto p-5'><a href="{{ route('books.show', $book)}}"><img src="{{ $book->cover_image }}" width="500px" alt="{{ $book->title }} book cover" class=""></a></p>
@@ -35,6 +68,7 @@
                 <p class="mt-6"><span class="inline-block w-40 font-semibold">ISBN: </span>{{ $book->isbn }}</p>
             </div>
         </div>
+
         <form action="/books/{{ $book->uuid }}/comments" method="POST">
             @csrf
             <label for="body">Comment:</label><br>

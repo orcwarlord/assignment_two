@@ -180,14 +180,16 @@ class BookController extends Controller
             'book_id' => $book->id,
             'user_id' => Auth::user()->id
         ])) {
-            return redirect()->route('books.index')
+            // return redirect()->route('books.index')
+            return redirect()->back()
             ->with('success', 'You have already liked for this book.');
         }
 
         $book->addUpLike(Auth::user());
 
-        return redirect()->route('books.index')
-        ->with('success', 'Book up liked');
+        // return redirect()->route('books.index')
+        return redirect()->back()
+        ->with('success', 'Book liked');
     }
 
     public function downLike(Book $book)
@@ -196,14 +198,17 @@ class BookController extends Controller
             'book_id' => $book->id,
             'user_id' => Auth::user()->id
         ])) {
-            return redirect()->route('books.index')
+            // return redirect()->route('books.index')
+            // ->with('success', 'You have already liked for this book.');
+            return redirect()->back()
             ->with('success', 'You have already liked for this book.');
         }
 
         $book->addDownLike(Auth::user());
 
-        return redirect()->route('books.index')
-        ->with('success', 'Book down liked');
+        // return redirect()->route('books.index')
+        return redirect()->back()
+        ->with('success', 'Book disliked');
     }
 
 }
