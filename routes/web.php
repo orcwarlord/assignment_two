@@ -62,6 +62,6 @@ Route::resource('books.comments', 'App\Http\Controllers\CommentController')->onl
 
 require __DIR__.'/auth.php';
 
-Route::post('/books/{book}/up-vote', [BookController::class, 'upVote'])->name('books.upvote')->middleware('auth');
+Route::post('/books/{book}/up-like', [BookController::class, 'upLike'])->name('books.uplike')->middleware('auth');
 
-Route::post('/books/{book}/down-vote', [BookController::class, 'downVote'])->name('books.downvote')->middleware('auth');
+Route::post('/books/{book}/down-like', [BookController::class, 'downlike'])->name('books.downlike')->middleware('auth');

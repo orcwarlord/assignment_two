@@ -100,8 +100,9 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $comments = $book-> comments->sortByDesc('created_at')->values()->all();
+        $likes = $book->likes->values()->all();
 
-        return view('books.show', compact('book', 'comments'));
+        return view('books.show', compact('book', 'comments', 'likes'));
 
     }
 
@@ -185,7 +186,7 @@ class BookController extends Controller
 
         $book->addUpLike(Auth::user());
 
-        return redirect()->route('books.indexUser')
+        return redirect()->route('books.index')
         ->with('success', 'Book up liked');
     }
 
@@ -195,13 +196,13 @@ class BookController extends Controller
             'book_id' => $book->id,
             'user_id' => Auth::user()->id
         ])) {
-            return redirect()->route('books.indexUser')
+            return redirect()->route('books.index')
             ->with('success', 'You have already liked for this book.');
         }
 
         $book->addDownLike(Auth::user());
 
-        return redirect()->route('books.indexUser')
+        return redirect()->route('books.index')
         ->with('success', 'Book down liked');
     }
 
