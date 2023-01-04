@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Book;
+use App\Models\Like;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -26,10 +27,15 @@ class BookController extends Controller
         $books = Book::when($request->search, function ($query) use ($request) {
             return $query->where('title', 'like', '%' . $request->search . '%')->orWhere('author', 'like', '%' . $request->search . '%');
         })
+
+        ->withLikes()
+
+
         ->paginate(20);
         // User functionality to be implemented
         if ($userLevel === 'user') {
             return view('books.indexUser', compact('books', 'search'));
+
 
         }
         else {
@@ -96,7 +102,9 @@ class BookController extends Controller
     {
         $comments = $book-> comments->sortByDesc('created_at')->values()->all();
 
-        return view('books.show', compact('book', 'comments'));
+        $likes = $book->likes->values()->all();
+
+        return view('books.show', compact('book', 'comments', 'likes'));
 
     }
 
@@ -160,5 +168,53 @@ class BookController extends Controller
         return to_route('books.index')->with('success', 'Note deleted successfully');
     }
 
+    protected function _likeExists($likeData)
+    {
+        return Like::where([
+            'book_id' => $likeData['book_id'],
+            'user_id' => $likeData['user_id']
+        ])->exists();
+    }
+
+    public function testLikeExists($likeData){
+        return $this->_likeExists($likeData);
+    }
+
+    public function upLike(Book $book)
+    {
+        if ($this->_likeExists([
+            'book_id' => $book->id,
+            'user_id' => Auth::user()->id
+        ])) {
+            // return redirect()->route('books.index')
+            return redirect()->back()
+            ->with('success', 'You have already liked for this book.');
+        }
+
+        $book->addUpLike(Auth::user());
+
+        // return redirect()->route('books.index')
+        return redirect()->back()
+        ->with('success', 'Book liked');
+    }
+
+    public function downLike(Book $book)
+    {
+        if ($this->_likeExists([
+            'book_id' => $book->id,
+            'user_id' => Auth::user()->id
+        ])) {
+            // return redirect()->route('books.index')
+            // ->with('success', 'You have already liked for this book.');
+            return redirect()->back()
+            ->with('success', 'You have already liked for this book.');
+        }
+
+        $book->addDownLike(Auth::user());
+
+        // return redirect()->route('books.index')
+        return redirect()->back()
+        ->with('success', 'Book disliked');
+    }
 
 }

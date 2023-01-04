@@ -4,24 +4,24 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
+class CreateLikesTable extends Migration
 {
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        Schema::create('comments', function (Blueprint $table) {
+    public function up() {
+        Schema::create('likes', function (Blueprint $table) {
             $table->id();
-            $table->longText('comment');
-            $table->foreignId('user_id');
-            $table->foreignId('book_id');
+            $table->foreignId('book_id')->constrained();
+            $table->foreignId('user_id')->constrained();
             $table->boolean('is_up')->default(true);
             $table->timestamps();
         });
-    }
+        }
+
+
 
     /**
      * Reverse the migrations.
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('comments');
+        Schema::dropIfExists('likes');
     }
-};
+}

@@ -32,9 +32,49 @@
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">Number of Pages:</span>{{ $book->no_pages }}</p>
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">Date Published:</span>{{ ($book->published_date)->format('jS F Y') }}</p>
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">ISBN:</span>{{ $book->isbn }}</p>
-                <span class="block opacity-70 text-sm mt-4">Updated: {{ $book->updated_at->diffForHumans()}}. Created: {{ $book->created_at->diffForHumans()}}</span>
+
+                <div class="flex flex-col md:flex-row justify-between">
+                    <span class="block opacity-70 text-sm mt-4">Updated: {{ $book->updated_at->diffForHumans()}}. Created: {{ $book->created_at->diffForHumans()}}</span>
+                    <div class="flex flex-col md:flex-row justify-between items-center">
+                        <p class="pr-0.5 bg-slate-300">
+                            <form action="{{ route('books.uplike', $book->uuid) }}" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-small hover:text-orange-700">
+                                    <span class="fa-stack ">
+                                        <i class="fas fa-circle fa-stack-2x text-orange-500 hover:text-orange-700"></i>
+                                        <i class="fas fa-thumbs-up fa-stack-1x"></i>
+                                    </span>
+                                </button>
+                                <span class="pr-4 -ml-4">{{ $book->up_likes }}</span>
+                            </form>
+
+                        </p>
+                        <span class="w-5"></span>
+                        <p class="pr-0.5 bg-slate-300">
+                        <form action="{{ route('books.downlike', $book->uuid) }}" method="POST">
+                            @csrf
+
+                            <button type="submit" class="btn  hover:text-orange-700">
+                                <span class="fa-stack ">
+                                    <i class="fas fa-circle fa-stack-2x text-orange-500 "></i>
+                                    <i class="fas fa-thumbs-down fa-stack-1x"></i>
+                                </span>
+
+                            </button>
+                            <span class="pr-4 -ml-4">{{ $book->down_likes }}</span>
+                        </form>
+                        </p>
+
+
+
+
+                    </div>
+                </div>
 
             </div>
+
+
+
 
 
             <div class="flex flex-col justify-between">
