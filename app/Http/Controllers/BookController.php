@@ -174,6 +174,10 @@ class BookController extends Controller
         ])->exists();
     }
 
+    public function testLikeExists($likeData){
+        return $this->_likeExists($likeData);
+    }
+
     public function upLike(Book $book)
     {
         if ($this->_likeExists([
