@@ -5,6 +5,9 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Book;
 use App\Models\User;
+
+use Illuminate\Http\Request;
+
 use Database\Seeders\BookSeeder;
 use Database\Seeders\UserSeeder;
 use App\Http\Controllers\BookController;
@@ -126,26 +129,81 @@ class BookTest extends TestCase
         $this->assertEquals($book, $response->getData()['book']);
     }
 
-    public function testUpdateMethod()
+    // public function testUpdateMethod()
+    // {
+    //     // First, create a new book instance
+    //     $newUserLevel = User::factory()->create(['userlevel' => 'admin']);
+    //     // // echo($newAdminLevel);
+    //     $book = Book::factory()->create(['user_id' => $newUserLevel->id]);
+
+    //     // // Next, create an instance of your controller and call the update method
+    //     $controller = new BookController();
+    //     $response = $controller->update(request(), $book);
+
+    //     // Finally, assert that the book instance was updated with the correct data
+    //     $this->assertEquals('title', $book->title);
+    //     $this->assertEquals('synopsis', $book->synopsis);
+    //     $this->assertEquals(100, $book->no_pages);
+    //     $this->assertEquals('1234567890123', $book->isbn);
+    //     $this->assertEquals('2020-01-01', $book->published_date);
+    //     $this->assertEquals('author', $book->author);
+    //     $this->assertEquals(19, $book->user_id);
+    //     $this->assertEquals('https://test-image.com', $book->cover_image);
+    // }
+
+    // class Request
+    // {
+    //     public $title;
+    //     public $synopsis;
+    //     public $no_pages;
+    //     public $isbn;
+    //     public $published_date;
+    //     public $author;
+    //     public $cover_image;
+    // }
+
+
+    public function test_update_function()
     {
-        // First, create a new book instance
         $newUserLevel = User::factory()->create(['userlevel' => 'admin'])->first();
-        // // echo($newAdminLevel);
+        // echo($newAdminLevel);
         $book = Book::factory()->create(['user_id' => $newUserLevel->id]);
+        // Set up the necessary preconditions
+        $book = new Book();
+        $book->title = "Old Title";
+        $book->synopsis = "Old Synopsis";
+        $book->no_pages = 100;
+        $book->isbn = "1234567890123";
+        $book->published_date = "2020-01-01";
+        $book->author = "Old Author";
+        $book->user_id = $newUserLevel->id;
+        $book->cover_image = "old_cover.jpg";
 
-        // // Next, create an instance of your controller and call the update method
-        $controller = new BookController();
-        $response = $controller->update(request(), $book);
+        $requestData = [
+            'title' => "New Title",
+            'synopsis' => "New Synopsis",
+            'no_pages' => 200,
+            'isbn' => "9876543219876",
+            'published_date' => "2022-01-01",
+            'author' => "New Author",
+            'cover_image' => "new_cover.jpg"
+        ];
 
-        // Finally, assert that the book instance was updated with the correct data
-        $this->assertEquals('title', $book->title);
-        $this->assertEquals('synopsis', $book->synopsis);
-        $this->assertEquals(100, $book->no_pages);
-        $this->assertEquals('1234567890123', $book->isbn);
-        $this->assertEquals('2020-01-01', $book->published_date);
-        $this->assertEquals('author', $book->author);
-        $this->assertEquals(19, $book->user_id);
-        $this->assertEquals('https://test-image.com', $book->cover_image);
+        // Call the update function
+        $request = new Request($requestData);
+        $bookController = new BookController();
+        $result = $bookController->update($request, $book);
+
+
+        // Verify the result
+        $this->assertEquals("New Title", $book->title);
+        $this->assertEquals("New Synopsis", $book->synopsis);
+        $this->assertEquals(200, $book->no_pages);
+        $this->assertEquals("9876543219876", $book->isbn);
+        $this->assertEquals("2022-01-01", $book->published_date);
+        $this->assertEquals("New Author", $book->author);
+        $this->assertEquals("new_cover.jpg", $book->cover_image);
+        // $this->assertEquals("Book updated successfully.", session("success"));
     }
 
 }

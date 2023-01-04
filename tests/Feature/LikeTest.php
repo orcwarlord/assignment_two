@@ -27,7 +27,6 @@ class LikeTest extends TestCase
         $user = User::factory()->create(['userlevel' => 'user']);
         // dd($user);
         $book = Book::factory()->create(['user_id' => $user->id]);
-        //    echo($book);
 
         // Create a like record for the user and book
         $like = Like::create([
@@ -35,7 +34,7 @@ class LikeTest extends TestCase
             'user_id' => $user->id,
             'is_up' => 1,
         ]);
-        echo($like);
+
         $like->save();
         // dd($like);
         $bookController = new BookController();
@@ -69,12 +68,8 @@ class LikeTest extends TestCase
     public function TestLikesCanBeSavedToDatabase()
     {
         // Create a mock user and book
-
-
         $user = User::factory()->create(['userlevel' => 'user']);
-        // dd($user);
         $book = Book::factory()->create(['user_id' => $user->id]);
-        //    echo($book);
 
         // Create a like record for the user and book
         $like = Like::create([
@@ -82,12 +77,10 @@ class LikeTest extends TestCase
             'user_id' => $user->id,
             'is_up' => 1,
         ]);
-        echo ($like);
+
         $like->save();
-        // dd($like);
         $bookController = new BookController();
         $response = $bookController->testLikeExists($like);
-        // dd($response);
 
         //Assert that the like is saved to the database
 
@@ -96,8 +89,6 @@ class LikeTest extends TestCase
             'user_id' => $user->id,
             'is_up' => 1,
         ]);
-
-
 
     }
 
@@ -158,45 +149,6 @@ class LikeTest extends TestCase
         ]);
     }
 
-
-    // public function a_user_can_like_or_dislike_a_book()
-    // {
-    //     // Create a mock user and book
-
-    //     $user = User::factory()->create(['userlevel' => 'user']);
-    //     // dd($user);
-    //     $book = Book::factory()->create(['user_id' => $user->id]);
-    //     //    echo($book);
-    //     $bookController = new BookController();
-    //     dd($bookController);
-
-    //     // Create a like record for the user and book
-    //     $like = Like::create([
-    //         'book_id' => $book->id,
-    //         'user_id' => $user->id,
-    //         // 'is_up' => 1,
-    //     ]);
-
-    //     $like->save();
-
-    //     // Assert that _likeExists returns true for the given user and book
-    //     $this->assertTrue($this->$bookController->_likeExists([
-
-    //         'book_id' => $book->id,
-    //         'user_id' => $user->id
-    //     ]));
-    //     // Assert that _likeExists returns false for a different book
-    //     $this->assertFalse($this->$bookController->_likeExists([
-    //         'book_id' => $book->id + 1,
-    //         'user_id' => $user->id
-    //     ]));
-
-    //     // Assert that _likeExists returns false for a different user
-    //     $this->assertFalse($this->$bookController->_likeExists([
-    //         'book_id' => $book->id,
-    //         'user_id' => $user->id + 1
-    //     ]));
-    // }
 }
 
 

@@ -155,6 +155,7 @@ class BookController extends Controller
         return to_route('books.show', $book)->with('success', 'Book updated successfully.');
     }
 
+
     /**
      * Remove the specified resource from storage.
      *
