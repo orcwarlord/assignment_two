@@ -32,6 +32,7 @@
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">Number of Pages:</span>{{ $book->no_pages }}</p>
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">Date Published:</span>{{ ($book->published_date)->format('jS F Y') }}</p>
                 <p class="mt-2"><span class="inline-block w-40 font-semibold">ISBN:</span>{{ $book->isbn }}</p>
+
                 <div class="flex flex-col md:flex-row justify-between">
                     <span class="block opacity-70 text-sm mt-4">Updated: {{ $book->updated_at->diffForHumans()}}. Created: {{ $book->created_at->diffForHumans()}}</span>
                     <div class="flex flex-col md:flex-row justify-between items-center">
@@ -72,33 +73,10 @@
 
             </div>
 
-            {{-- <div>
-                <p>
-                Likes: {{ $book->up_likes }}<br>
-                Dislikes: {{ $book->down_likes }}
-                </p>
 
-                <form action="{{ route('books.uplike', $book->uuid) }}" method="POST" class="p-0">
-                    @csrf
-                    <button type="submit" class="btn btn-small hover:text-orange-700">
-                        <span class="fa-stack ">
-                            <i class="fas fa-circle fa-stack-2x text-orange-500 hover:text-orange-700"></i>
-                            <i class="fas fa-thumbs-up fa-stack-1x"></i>
-                        </span>
 
-                </form>
 
-                <form action="{{ route('books.downlike', $book->uuid) }}" method="POST">
-                    @csrf
 
-                    <button type="submit" class="btn  hover:text-orange-700">
-                        <span class="fa-stack ">
-                            <i class="fas fa-circle fa-stack-2x text-orange-500 "></i>
-                            <i class="fas fa-thumbs-down fa-stack-1x"></i>
-                        </span>
-                    </button>
-                </form>
-            </div> --}}
             <div class="flex flex-col justify-between">
                 <p>{{ $book->comments->count() }} comments</p>
                 <p class="text-center"><a href="{{ route('books.show', $book) }}" class="btn-link btn-lg mb-2 text-center">Book Details</a></p>

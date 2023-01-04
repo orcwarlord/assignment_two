@@ -20,8 +20,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UserSeeder::class,
             BookSeeder::class,
+
             CommentSeeder::class,
             LikeSeeder::class,
+
         ]);
 
         $this->call([

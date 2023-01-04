@@ -5,9 +5,11 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\Book;
 use App\Models\User;
+
 use App\Models\Comment;
 use Illuminate\Database\Eloquent\Factory;
 use App\Http\Controllers\CommentController;
+
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -43,6 +45,7 @@ class StoreCommentTest extends TestCase
         ]);
     }
 
+
     public function testDestroyComment()
     {
         // Set up a mock user, book, and comment
@@ -67,6 +70,7 @@ class StoreCommentTest extends TestCase
         // Assert that the response redirects to the book show page
         $response->assertRedirect(route('books.show', $book->uuid));
     }
+
 }
 
 

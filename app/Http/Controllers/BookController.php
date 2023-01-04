@@ -27,13 +27,14 @@ class BookController extends Controller
         $books = Book::when($request->search, function ($query) use ($request) {
             return $query->where('title', 'like', '%' . $request->search . '%')->orWhere('author', 'like', '%' . $request->search . '%');
         })
+
         ->withLikes()
+
+
         ->paginate(20);
         // User functionality to be implemented
         if ($userLevel === 'user') {
             return view('books.indexUser', compact('books', 'search'));
-
-
 
 
         }
@@ -100,6 +101,7 @@ class BookController extends Controller
     public function show(Book $book)
     {
         $comments = $book-> comments->sortByDesc('created_at')->values()->all();
+
         $likes = $book->likes->values()->all();
 
         return view('books.show', compact('book', 'comments', 'likes'));

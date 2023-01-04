@@ -38,6 +38,7 @@ class CreateCommentsTable extends Migration
             $table->dropForeign(['book_id']);
 
             $table->dropColumn('book_id');
+
         });
 
         Schema::dropIfExists('comments');
