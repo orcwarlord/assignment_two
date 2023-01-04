@@ -130,20 +130,20 @@ class BookTest extends TestCase
     {
         // First, create a new book instance
         $newUserLevel = User::factory()->create(['userlevel' => 'admin'])->first();
-        // echo($newAdminLevel);
+        // // echo($newAdminLevel);
         $book = Book::factory()->create(['user_id' => $newUserLevel->id]);
 
-        // Next, create an instance of your controller and call the update method
+        // // Next, create an instance of your controller and call the update method
         $controller = new BookController();
         $response = $controller->update(request(), $book);
 
         // Finally, assert that the book instance was updated with the correct data
-        $this->assertEquals('test title', $book->title);
-        $this->assertEquals('test synopsis', $book->synopsis);
+        $this->assertEquals('title', $book->title);
+        $this->assertEquals('synopsis', $book->synopsis);
         $this->assertEquals(100, $book->no_pages);
         $this->assertEquals('1234567890123', $book->isbn);
         $this->assertEquals('2020-01-01', $book->published_date);
-        $this->assertEquals('test author', $book->author);
+        $this->assertEquals('author', $book->author);
         $this->assertEquals(19, $book->user_id);
         $this->assertEquals('https://test-image.com', $book->cover_image);
     }

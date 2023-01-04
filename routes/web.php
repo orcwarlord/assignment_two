@@ -61,3 +61,7 @@ Route::resource('books.comments', 'App\Http\Controllers\CommentController')->onl
 // Route::delete('comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
 
 require __DIR__.'/auth.php';
+
+Route::post('/books/{book}/up-like', [BookController::class, 'upLike'])->name('books.uplike')->middleware('auth');
+
+Route::post('/books/{book}/down-like', [BookController::class, 'downlike'])->name('books.downlike')->middleware('auth');

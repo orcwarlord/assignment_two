@@ -85,17 +85,7 @@ class CommentController extends Controller
      * @param  \App\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    // public function update(Request $request, Book $book, Comment $comment)
-    // {
-    //     $validatedData = $request->validate([
-    //         'body' => 'required|max:1000',
-    //     ]);
 
-    //     $comment->body = $validatedData['body'];
-    //     $comment->save();
-
-    //     return redirect()->route('books.show', $book->id);
-    // }
 
     /**
      * Remove the specified comment from storage.
